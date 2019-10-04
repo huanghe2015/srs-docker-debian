@@ -8,8 +8,8 @@ ENV SRS_COMMIT=16050008172832d8dbe847940457e74e4f5669e4
 ENV SRS_CONFIGURE_ARGS=
 
 RUN set -ex; \
-    apt update; \
-    apt install -y --no-install-recommends wget ca-certificates sudo python net-tools libfile-spec-native-perl; \
+    apt-get update; \
+    apt-get install -y --no-install-recommends wget ca-certificates sudo python net-tools libfile-spec-native-perl; \
     cd /tmp; \
     wget https://github.com/ossrs/srs/archive/${SRS_COMMIT}.tar.gz; \
     tar zxf ${SRS_COMMIT}.tar.gz; \
@@ -18,7 +18,7 @@ RUN set -ex; \
     make; \
     make install; \
     rm -rf /tmp/*; \
-    apt clean;
+    apt-get clean;
 COPY ./srs.conf /srs/conf/docker.conf
 
 FROM debian:buster-slim
