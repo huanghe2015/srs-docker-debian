@@ -28,3 +28,5 @@ EXPOSE 1935 1985 8080
 COPY --from=build /srs /srs
 WORKDIR /srs
 CMD ["./objs/srs", "-c", "./conf/docker.conf"]
+LABEL Name="SRS_BUILD"
+LABEL Version="0.0.1"
