@@ -10,7 +10,7 @@ ENV SRS_CONFIGURE_ARGS=--with-ffmpeg
 RUN set -ex; \
     apt-get update; \
     apt-get upgrade -y; \
-    apt-get install -y --no-install-recommends wget ca-certificates sudo python net-tools; \
+    apt-get install -y --no-install-recommends wget ca-certificates sudo python net-tools apt-utils; \
     cd /tmp; \
     wget https://github.com/ossrs/srs/archive/${SRS_COMMIT}.tar.gz; \
     tar zxf ${SRS_COMMIT}.tar.gz; \
