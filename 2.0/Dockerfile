@@ -1,12 +1,9 @@
 ARG SRS_VERSION=2.0.263
-
-FROM debian:buster
-
+FROM debian:buster AS build
 ARG SRS_VERSION
 ENV SRS_VERSION=${SRS_VERSION}
 ENV SRS_COMMIT=6e6e996bbaee73473f2ace76b7cb45a065368e7c
 ENV SRS_CONFIGURE_ARGS=
-
 RUN set -ex; \
     apt-get update; \
     apt-get upgrade -y; \
@@ -21,12 +18,13 @@ RUN set -ex; \
     rm -rf /tmp/*; \
     apt-get clean;
 COPY ./srs.conf /srs/conf/docker.conf
-
-FROM debian:buster-slim
+# Real Content
+FROM debian:buster-slim AS dist
 ARG SRS_VERSION
 ENV SRS_VERSION=${SRS_VERSION}
 EXPOSE 1935 1985 8080
 COPY --from=build /srs /srs
+COPY source dest
 WORKDIR /srs
 CMD ["./objs/srs", "-c", "./conf/docker.conf"]
 LABEL Name="SRS_BUILD"

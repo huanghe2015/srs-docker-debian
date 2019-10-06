@@ -1,6 +1,6 @@
 ARG SRS_VERSION=2.0.263
 
-FROM debian:buster
+FROM debian:buster AS build
 
 ARG SRS_VERSION
 ENV SRS_VERSION=${SRS_VERSION}
@@ -23,7 +23,7 @@ RUN set -ex; \
     apt-get clean;
 COPY ./srs.conf /srs/conf/docker.conf
 
-FROM debian:buster-silm
+FROM debian:buster-silm AS dist
 ARG SRS_VERSION
 ENV SRS_VERSION=${SRS_VERSION}
 EXPOSE 1935 1985 8080
