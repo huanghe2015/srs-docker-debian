@@ -27,4 +27,4 @@ COPY --from=build /srs /srs
 WORKDIR /srs
 CMD ["./objs/srs", "-c", "./conf/docker.conf"]
 LABEL Name="SRS_BUILD"
-LABEL Version="0.0.1"
+LABEL Version="0.0.2"
