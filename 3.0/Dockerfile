@@ -1,10 +1,10 @@
-ARG SRS_VERSION=3.0.56
+ARG SRS_VERSION=3.0.60
 
 FROM debian:buster AS build
 
 ARG SRS_VERSION
 ENV SRS_VERSION=${SRS_VERSION}
-ENV SRS_COMMIT=db077254b28db97f44f810f6038f0fb6eebd0cf3
+ENV SRS_COMMIT=2579c5fc9e4204dc01f5530dbb183e8a83f24bb9
 ENV SRS_CONFIGURE_ARGS=
 
 RUN set -ex; \
@@ -30,4 +30,4 @@ COPY --from=build /srs /srs
 WORKDIR /srs
 CMD ["./objs/srs", "-c", "./conf/docker.conf"]
 LABEL Name="SRS_BUILD"
-LABEL Version="0.0.2"
+LABEL Version="0.0.3"
